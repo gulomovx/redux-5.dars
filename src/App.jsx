@@ -1,25 +1,18 @@
 import React from "react";
-import BasketProducts from "./components/BasketProducts";
-import Navbar from "./components/Navbar";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { updateTotal } from "./redux/app/features/basketSlice";
+import Home from "./Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Create from "./Create";
+import Update from "./Update";
 const App = () => {
-  const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.basket);
-
-  useEffect(() => {
-    dispatch(updateTotal());
-  }, [products, dispatch]);
-
   return (
-    <div className="w-[90%] text-center mt-8 mx-auto   ">
-      <h1 className="text-white text-3xl bg-slate-500 p-2 rounded  ">
-        Redux Store
-      </h1>
-      <Navbar />
-      <hr />
-      <BasketProducts />
+    <div className="w-[90%] mx-auto">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/edit/:id" element={<Update/>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
